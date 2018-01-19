@@ -1,0 +1,11 @@
+{
+  "name": "simple-blockchain",
+  "version": "0.0.1",
+  "description": "Simple blockchain test project",
+  "main": "index.js",
+  "author": "Yevhenii Kravchenko",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
