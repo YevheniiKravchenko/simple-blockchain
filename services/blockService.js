@@ -11,7 +11,7 @@ class BlockService {
   add(data) {
     this.pending.push(data);
 
-    console.log(`Added new entry. Length: ${this.pending.length}`);
+    console.log(`Added new entry: ${data}. Length: ${this.pending.length}`);
 
     if(this.pending.length === BLOCK_SIZE) {
       this._writeBlock();
@@ -64,6 +64,8 @@ class BlockService {
     );
 
     this.pending = [];
+
+    return Promise.resolve();
   }
 
   _getDB() {

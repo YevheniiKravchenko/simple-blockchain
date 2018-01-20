@@ -1,9 +1,9 @@
 import blockService from '../services/blockService';
 
-export default (req, res) => {
-  const { data } = req.body;
+export default async function(req, res) {
+  const data = req.body.data || Object.keys(req.body)[0];
 
-  blockService.add(data);
+  await blockService.add(data);
 
-  return res.sendStatus(200);
+  return res.send(data);
 }
