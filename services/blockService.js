@@ -3,7 +3,7 @@ import { getDB } from './dbService';
 
 const BLOCK_SIZE = 5;
 
-export default class {
+class BlockService {
   constructor() {
     this.pending = [];
   }
@@ -11,11 +11,18 @@ export default class {
   add(data) {
     this.pending.push(data);
 
-    console.log(`Length: ${this.pending.length}`);
+    console.log(`Added new entry. Length: ${this.pending.length}`);
 
     if(this.pending.length === BLOCK_SIZE) {
       this._writeBlock();
     }
+  }
+
+  async get(size) {
+    const db = this._getDB();
+    const blocks = await db.all('SELECT * from Block ORDER BY timestamp DESC LIMIT ?', size);
+
+    return blocks.map(block => Object.assign(block, { rows: JSON.parse(block.rows) }));
   }
 
   // Protected scope
@@ -66,3 +73,5 @@ export default class {
     return db;
   }
 }
+
+export default new BlockService();
